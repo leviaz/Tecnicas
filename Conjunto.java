@@ -1,5 +1,5 @@
-class Conjunto{
-	public int elementos;
+public class Conjunto {
+    public int elementos;
 	public int ult;
 	public int vetor[];
 	
@@ -29,9 +29,9 @@ class Conjunto{
 			if(i==this.getElementos()){
 				this.vetor[this.getUlt()]=el;
 				this.setUlt(this.getUlt()+1);
-				System.out.println("inserido.");
+				//System.out.println("inserido.");
 			}else{
-				System.out.println("Elemento já existe no conjunto. ");
+				System.out.println("Elemento jรก existe no conjunto. ");
 			}
 		}else{
 			System.out.println("conjunto cheio");
@@ -47,18 +47,18 @@ class Conjunto{
 		}
 		return false; 
 	}
-	public void intersecao(Conjunto c2){
+	public Conjunto intersecao(Conjunto c2){
 		int i=0;
 		int j=0;
 		int l=0;
-		int intersecao[];
-		intersecao = new int[this.getElementos()+c2.getElementos()];
+		Conjunto cInt = new Conjunto(this.getElementos()+c2.getElementos());
+		
 		for(i=0;i<=this.getUlt()-1;i++){
 			for(j=0;j<=c2.getUlt()-1;j++){
 				if(this.vetor[i]==c2.vetor[j]){
 				
-					intersecao[l]=this.vetor[i];
-					System.out.println(intersecao[l]);
+					cInt.inserir(this.vetor[i]);
+					System.out.println(cInt.vetor[l]);
 					l++;
 						
 					}
@@ -67,14 +67,15 @@ class Conjunto{
 		for(i=0;i<=l;i++){
 			//System.out.println(intersecao[i]);
 		}
+                return cInt;
 	}
-        public void diferenca(Conjunto c2){
+        public Conjunto diferenca(Conjunto c2){
             int i=0;
             int j=0;
             int l=0;
-            int diferenca[];
+            Conjunto cDif = new Conjunto(this.getElementos());
             boolean dif=true;
-            diferenca = new int[this.getElementos()];
+           
             for(i=0;i<=this.getUlt()-1;i++){
                 dif=true;
                 for(j=0;j<=c2.getUlt()-1;j++){
@@ -83,20 +84,21 @@ class Conjunto{
                     }
                 }
                 if(dif==true){
-                    diferenca[l]=this.vetor[i];
+                    cDif.inserir(this.vetor[i]);
                     l++;
                 }
             }
             for(i=0;i<=l-1;i++){
-                System.out.println(","+diferenca[i]);
+                //System.out.println(","+cDif.vetor[i]);
             }
+            return cDif;
         }
         public boolean subConj(Conjunto c2){
             int i=0;
             int j=0;
             boolean verif=false;
             if(this.getUlt()-1>c2.getUlt()-1){
-                System.out.println("o conjunto ? maior que outro logo n?o ? possivel este ser subconjunto");
+                System.out.println("o conjunto é maior que outro logo não é possivel este ser subconjunto");
             }else{
                 for(i=0;i<=this.getUlt()-1;i++){
                     verif=false;
@@ -119,44 +121,75 @@ class Conjunto{
             System.out.println("valido.");
            return true; 
         }
-        public void uniao(Conjunto c2){
+        public Conjunto uniao(Conjunto c2){
             int i=0;
             int j=0;
             int l=0;
-            int uniao[];
+            Conjunto cUniao= new Conjunto(this.getUlt()+c2.getUlt());
+            
             boolean verif;
-            uniao = new int[this.getUlt()+c2.getUlt()];
-            for(i=0;i<=this.getUlt();i++){
-                uniao[i]=this.vetor[i];
+            
+            for(i=0;i<=this.getUlt()-1;i++){
+                cUniao.inserir(this.vetor[i]);
             }
-            l=this.getUlt();
+            //l=this.getUlt();
             for(i=0;i<=c2.getUlt()-1;i++){
                 verif=true;
                 for(j=0;j<=l-1;j++){
-                    if(c2.vetor[i]==uniao[j]){
+                    if(c2.vetor[i]==cUniao.vetor[j]){
                         verif=false;
                     }
                 }
                 if(verif==true){
-                    uniao[l]=c2.vetor[i];
-                    l++;
+                    cUniao.inserir(c2.vetor[i]);
+                    
                 }
             }
-            for(i=0;i<=l-1;i++){
+            for(i=0;i<=cUniao.getUlt()-1;i++){
                 
-                System.out.print(uniao[i]+",");
+                System.out.print(cUniao.vetor[i]+",");
                 
             }    
-            
+            return cUniao;
         }
         public void produtoCart(Conjunto c2){
             int i=0;
             int j=0;
+            int l=0;
+            int [] [] prod = new int [this.getUlt()*c2.getUlt()] [2];
             System.out.println("produto cartesiano:");
             for(i=0;i<=this.getUlt()-1;i++){
                 for(j=0;j<=c2.getUlt()-1;j++){
+                    prod[l][0]=this.vetor[i];
+                    prod[l][1]=c2.vetor[j];
+                    l++;
                     System.out.println("("+this.vetor[i]+","+c2.vetor[j]+")");
                 }
             }
+        }
+        public boolean igualdade(Conjunto c2){
+            int i=0;
+            int j=0;
+            boolean igual=true;
+            if(this.getUlt()==c2.getUlt()){
+                for(i=0;i<=this.getUlt()-1;i++){
+                    igual=false;
+                    for(j=0;j<=c2.getUlt()-1;j++){
+                        if(this.vetor[i]==c2.vetor[j]){
+                            igual=true;
+                        }
+                    }
+                    if(igual==false){
+                        System.out.println("diferentes.");
+                        return false;
+                    }
+                }
+                System.out.println("iguais.");
+                return true;
+            }else{
+                System.out.println("diferentes.");
+                return false;
+            }
+            
         }
 }
