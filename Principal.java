@@ -54,12 +54,20 @@ public class Principal {
         System.out.println("conjunto dos primos");
         cpr.mostrar();
         System.out.println("============");
-        Conjunto up;
-        System.out.println("uniao dos pares e primos:");
-        up=cp.uniao(ci);
-        up.mostrar();
+        System.out.println("a pertinencia de pares,impares e primos em relacao ao conjunto dos naturais.");
+        Conjunto cp1;
+        Conjunto cp2;
+        Conjunto cp3;
+        cp1=cp.intersecao(cn);
+        cp1.mostrar();
+        cp2=ci.intersecao(cn);
+        cp2.mostrar();
+        cp3=cpr.intersecao(cn);
+        cp3.mostrar();
         System.out.println("============");
-        System.out.println("igualdade entre uniao de pares e impares e naturais");
+        System.out.println("igualdade entre uniao de pares e impares com os naturais");
+        Conjunto up;
+        up=cp.uniao(ci);
         up.igualdade(cn);
         System.out.println("===============");
         System.out.println("intersecao entre pares e impares:");
@@ -67,6 +75,11 @@ public class Principal {
         vazio=cp.intersecao(ci);
         vazio.mostrar();
         System.out.println("===============");
+        System.out.println("conjunto dos primos é subconjunto dele mesmo");
+        cpr.subConj(cpr);
+        System.out.println("===================");
+        
+        
                 
         System.out.println("=======================");
         
@@ -90,24 +103,62 @@ public class Principal {
         cB.inserir(3);
         cB.inserir(6);
         cB.inserir(8);
-         
+        System.out.println("==========de morgan=============="); 
         Conjunto u; //u sera a uniao dos conjuntos a e b
         
         u=cA.uniao(cB);
         Conjunto uv;
         uv=universo.diferenca(u);//uv sera o complementar de u(uniao de a e b) em relacao ao universo
         //nA E nB serao os complementares de a e b em ralacao ao universo
-        System.out.println("======");
+       
         Conjunto nA;
         Conjunto nB;
         nA=universo.diferenca(cA);
+        
         nB=universo.diferenca(cB);
+        
      
         Conjunto ni;//ni sera a intersercao dos complemetares nA e nB
         ni=nA.intersecao(nB);
         uv.igualdade(ni);//verficar se ambos sao iguais provando assim de morgan
-        cA.igualdade(cB);
-        cA.mostrar();
+        
+        
+        System.out.println("=======");
+        System.out.println("===============de morgan pt2===============");
+        Conjunto cA2 = new Conjunto(7);//criando a e b conjuntos
+        cA2.inserir(30);
+        cA2.inserir(39);
+        cA2.inserir(32);
+        cA2.inserir(25);
+        cA2.inserir(11);
+        Conjunto cB2 = new Conjunto(7);
+        cB2.inserir(30);
+        cB2.inserir(1);
+        cB2.inserir(31);
+        cB2.inserir(25);
+        cB2.inserir(41);
+        Conjunto inte;
+        inte=cA2.intersecao(cB2);//realizando sua intersecao e posteriormente modificando para o complmentar com o universo
+        inte.mostrar();
+        Conjunto ninte;
+        ninte=universo.diferenca(inte);//agora criando complementares
+        
+        Conjunto NcA2;
+        Conjunto NcB2;
+        NcA2=universo.diferenca(cA2);
+        NcB2=universo.diferenca(cB2);
+        Conjunto ninte2;
+        
+        ninte2=NcA2.uniao(NcB2);
+        ninte2.igualdade(ninte);
+        ninte.mostrar();
+        ninte2.mostrar();
+        
+        
+        
+        
+        
+        
         Conjunto c4 = new Conjunto(4);
         c4.inserir("p");
         System.out.println("====== conjunto q recebe qualquer elemento=====");
@@ -117,8 +168,10 @@ public class Principal {
         c4.mostrar();
         System.out.println("=======");
         System.out.println("===============produto cartesiano===============");
-        cp.prodCart(ci);
+        Conjunto prod;        
+        prod=cp.prodCart(ci);
+        prod.mostrar();
         System.out.println("========");
         
     }
-    }
+}
