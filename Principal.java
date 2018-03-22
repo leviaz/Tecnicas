@@ -169,9 +169,10 @@ public class Principal {
         System.out.println("=======");
         System.out.println("===============produto cartesiano===============");
         Conjunto prod;        
-        prod=cp.prodCart(ci);
-        prod.mostrar();
+        prod=cpr.prodCart(ci);
+        
         System.out.println("========");
+        
         
     }
 }
