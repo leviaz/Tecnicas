@@ -29,7 +29,7 @@ public class Conjunto {
 				this.setUlt(this.getUlt()+1);
 				//System.out.println("inserido.");
 			}else{
-				System.out.println("Elemento ja existe no conjunto. ");
+				//System.out.println("Elemento ja existe no conjunto. ");
 			}
 		}else{
 			System.out.println("conjunto cheio");
@@ -56,7 +56,7 @@ public class Conjunto {
 				if(this.vetor[i]==c2.vetor[j]){
 				
 					cInt.inserir(this.vetor[i]);
-					System.out.println(cInt.vetor[l]);
+					//System.out.println(cInt.vetor[l]);
 					l++;
 						
 					}
@@ -184,20 +184,22 @@ public class Conjunto {
             }
             System.out.println("}");
         }
-        public void prodCart(Conjunto c2){
+        public Conjunto prodCart(Conjunto c2){
             int i=0;
             int j=0;
             int l=0;
-            Object [] [] prod = new Object [this.getUlt()*c2.getUlt()] [2];
-            System.out.println("produto cartesiano:");
+            Conjunto tmp = new Conjunto(2);
+            int n = (this.getUlt())*(c2.getUlt());
+            Conjunto prod = new Conjunto(n);
             for(i=0;i<=this.getUlt()-1;i++){
-                for(j=0;j<=c2.getUlt()-1;j++){
-                    prod[l][0]=this.vetor[i];
-                    prod[l][1]=c2.vetor[j];
-                    l++;
-                    System.out.println("("+this.vetor[i]+","+c2.vetor[j]+")");
-                }
+            	for(j=0;j<=c2.getUlt()-1;j++){
+            		tmp.vetor[0]=this.vetor[i];
+            		tmp.vetor[1]=c2.vetor[j];
+            		prod.inserir(tmp);
+            		
+            	}
             }
+            return prod;
+            
         }
 }
-    	
