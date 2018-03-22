@@ -1,7 +1,7 @@
 public class Conjunto {
-    public int elementos;
+	public int elementos;
 	public int ult;
-	public int vetor[];
+	public Object vetor[];
 	
 	public int getElementos(){
 		return this.elementos;
@@ -18,29 +18,27 @@ public class Conjunto {
 	public Conjunto (int e){
 		this.setElementos(e);
 		this.setUlt(0);
-		vetor = new int[e];
+                vetor = new Object [e];
 	}
-	public void inserir(int el){
+	public void inserir(Object el){
 		if (this.getUlt()<=this.getElementos()){
-		    int i=0;
-			while(i<=this.getElementos()-1 && this.vetor[i]!= el){
-				i++;
-			}
-			if(i==this.getElementos()){
+		    
+			boolean verif=this.existe(el);
+			if(verif==false){
 				this.vetor[this.getUlt()]=el;
 				this.setUlt(this.getUlt()+1);
 				//System.out.println("inserido.");
 			}else{
-				System.out.println("Elemento jรก existe no conjunto. ");
+				System.out.println("Elemento ja existe no conjunto. ");
 			}
 		}else{
 			System.out.println("conjunto cheio");
 		}
 		
 	}
-	public boolean existe(int el){
+	public boolean existe(Object el){
 		int i=0;
-		for(i=0;i<=this.getElementos()-1;i++){
+		for(i=0;i<=this.getUlt()-1;i++){
 			if(el==this.vetor[i]){
 				return true;
 			}
@@ -145,28 +143,10 @@ public class Conjunto {
                     
                 }
             }
-            for(i=0;i<=cUniao.getUlt()-1;i++){
-                
-                System.out.print(cUniao.vetor[i]+",");
-                
-            }    
+               
             return cUniao;
         }
-        public void produtoCart(Conjunto c2){
-            int i=0;
-            int j=0;
-            int l=0;
-            int [] [] prod = new int [this.getUlt()*c2.getUlt()] [2];
-            System.out.println("produto cartesiano:");
-            for(i=0;i<=this.getUlt()-1;i++){
-                for(j=0;j<=c2.getUlt()-1;j++){
-                    prod[l][0]=this.vetor[i];
-                    prod[l][1]=c2.vetor[j];
-                    l++;
-                    System.out.println("("+this.vetor[i]+","+c2.vetor[j]+")");
-                }
-            }
-        }
+       
         public boolean igualdade(Conjunto c2){
             int i=0;
             int j=0;
@@ -192,4 +172,32 @@ public class Conjunto {
             }
             
         }
+        public void mostrar(){
+            System.out.print("{");
+            for(int i=0;i<=this.getUlt()-1;i++){
+                if(i==this.getUlt()-1){
+                    System.out.print(this.vetor[i]);
+                }else{
+                    System.out.print(this.vetor[i]+",");
+                }
+                    
+            }
+            System.out.println("}");
+        }
+        public void prodCart(Conjunto c2){
+            int i=0;
+            int j=0;
+            int l=0;
+            Object [] [] prod = new Object [this.getUlt()*c2.getUlt()] [2];
+            System.out.println("produto cartesiano:");
+            for(i=0;i<=this.getUlt()-1;i++){
+                for(j=0;j<=c2.getUlt()-1;j++){
+                    prod[l][0]=this.vetor[i];
+                    prod[l][1]=c2.vetor[j];
+                    l++;
+                    System.out.println("("+this.vetor[i]+","+c2.vetor[j]+")");
+                }
+            }
+        }
 }
+    	
