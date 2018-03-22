@@ -1,13 +1,13 @@
 public class Conjunto {
-	public int elementos;
+	public int max;
 	public int ult;
 	public Object vetor[];
 	
-	public int getElementos(){
-		return this.elementos;
+	public int getMax(){
+		return this.max;
 	}
-	public void setElementos(int e){
-		this.elementos=e;
+	public void setMax(int e){
+		this.max=e;
 	}
 	public int getUlt(){
 		return this.ult;
@@ -16,12 +16,12 @@ public class Conjunto {
 		this.ult=u;
 	}
 	public Conjunto (int e){
-		this.setElementos(e);
+		this.setMax(e);
 		this.setUlt(0);
                 vetor = new Object [e];
 	}
 	public void inserir(Object el){
-		if (this.getUlt()<=this.getElementos()){
+		if (this.getUlt()<=this.getMax()){
 		    
 			boolean verif=this.existe(el);
 			if(verif==false){
@@ -38,18 +38,31 @@ public class Conjunto {
 	}
 	public boolean existe(Object el){
 		int i=0;
-		for(i=0;i<=this.getUlt()-1;i++){
-			if(el==this.vetor[i]){
-				return true;
-			}
-		}
-		return false; 
-	}
+                
+		if(el instanceof Conjunto){
+                    for(i=0;i<=this.getUlt()-1;i++){
+                        if(el.equals(this.vetor[i])){
+                        } else {
+                            return true;
+                        }
+                        
+                    }
+                    return false;
+                }
+                for(i=0;i<=this.getUlt()-1;i++){
+                  if(el==this.vetor[i]){
+                      return true;
+                  }  
+                }
+                return false;
+        }
+		 
+	
 	public Conjunto intersecao(Conjunto c2){
 		int i=0;
 		int j=0;
 		int l=0;
-		Conjunto cInt = new Conjunto(this.getElementos()+c2.getElementos());
+		Conjunto cInt = new Conjunto(this.getMax()+c2.getMax());
 		
 		for(i=0;i<=this.getUlt()-1;i++){
 			for(j=0;j<=c2.getUlt()-1;j++){
@@ -71,7 +84,7 @@ public class Conjunto {
             int i=0;
             int j=0;
             int l=0;
-            Conjunto cDif = new Conjunto(this.getElementos());
+            Conjunto cDif = new Conjunto(this.getMax());
             boolean dif=true;
            
             for(i=0;i<=this.getUlt()-1;i++){
@@ -196,6 +209,7 @@ public class Conjunto {
             		tmp.vetor[0]=this.vetor[i];
             		tmp.vetor[1]=c2.vetor[j];
             		prod.inserir(tmp);
+                        System.out.println("{"+this.vetor[i]+","+c2.vetor[j]+"}");
             		
             	}
             }
