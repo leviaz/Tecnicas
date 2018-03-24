@@ -60,10 +60,13 @@ public class Principal {
         Conjunto cp3;
         cp1=cp.intersecao(cn);
         cp1.mostrar();
+        cp.subConj(cn);
         cp2=ci.intersecao(cn);
         cp2.mostrar();
+        ci.subConj(cn);
         cp3=cpr.intersecao(cn);
         cp3.mostrar();
+        cpr.subConj(cn);
         System.out.println("============");
         System.out.println("igualdade entre uniao de pares e impares com os naturais");
         Conjunto up;
@@ -78,6 +81,10 @@ public class Principal {
         System.out.println("conjunto dos primos é subconjunto dele mesmo");
         cpr.subConj(cpr);
         System.out.println("===================");
+        System.out.println("a diferenca entre naturais e pares");
+        Conjunto Cd;
+        Cd=cn.diferenca(cp);
+        Cd.mostrar();
         
         
                 
