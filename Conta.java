@@ -6,4 +6,5 @@ abstract class Conta{
 	public abstract void consultarSaldo();
 	public abstract void creditar(float v);
 	public abstract void debitar(float v);
+	public abstract int getId();
 }
